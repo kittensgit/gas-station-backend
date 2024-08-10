@@ -31,7 +31,11 @@ dotenv.config();
 mongoose
     .connect(
         process.env.MONGODB_URI ||
-            `mongodb+srv://Nika:${MONGODB_PASS}@cluster.bw68ue0.mongodb.net/gas_station?retryWrites=true&w=majority&appName=Cluster`
+            `mongodb+srv://Nika:${MONGODB_PASS}@cluster.bw68ue0.mongodb.net/gas_station?retryWrites=true&w=majority&appName=Cluster`,
+        {
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 30000,
+        }
     )
     .then(() => {
         console.log('DB OK');
