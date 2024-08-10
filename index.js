@@ -29,7 +29,10 @@ import {
 dotenv.config();
 
 mongoose
-    .connect(process.env.MONGODB_URI)
+    .connect(
+        process.env.MONGODB_URI ||
+            `mongodb+srv://Nika:${MONGODB_PASS}@cluster.bw68ue0.mongodb.net/gas_station?retryWrites=true&w=majority&appName=Cluster`
+    )
     .then(() => {
         console.log('DB OK');
     })
