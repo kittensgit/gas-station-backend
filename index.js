@@ -186,7 +186,7 @@ app.put(
     OrderedProductController.changeStatusReady
 );
 
-app.listen(process.env.PORT || 2222, (err) => {
+app.listen(process.env.PORT || 2222, '0.0.0.0', (err) => {
     if (err) return console.log(err);
 
     console.log('Server OK');
