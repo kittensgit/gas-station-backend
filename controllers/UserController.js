@@ -114,6 +114,16 @@ export const refuel = async (req, res) => {
 
         // payments logic
 
+        const success_url =
+            process.env.NODE_ENV === 'production'
+                ? 'https://gas-station-frontend-tau.vercel.app/refuelHistory'
+                : 'http://localhost:3000/refuelHistory';
+
+        const cancel_url =
+            process.env.NODE_ENV === 'production'
+                ? 'https://gas-station-frontend-tau.vercel.app/'
+                : 'http://localhost:3000/';
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
@@ -129,8 +139,8 @@ export const refuel = async (req, res) => {
                 },
             ],
             mode: 'payment',
-            success_url: 'http://localhost:3000/refuelHistory',
-            cancel_url: 'http://localhost:3000/',
+            success_url,
+            cancel_url,
             locale: 'en',
         });
 
